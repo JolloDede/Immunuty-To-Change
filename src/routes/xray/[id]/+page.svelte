@@ -1,5 +1,5 @@
 <script lang="ts">
-    export let data: any;
+    // export let data: any;
 </script>
 
-<h1>{data.title}</h1>
+<!-- <h1>{data.title}</h1> -->
