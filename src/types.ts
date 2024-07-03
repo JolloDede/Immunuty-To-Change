@@ -1,5 +1,5 @@
 
-class Topic {
+export class Topic {
     id: number;
     title: string;
     goalList: string[];

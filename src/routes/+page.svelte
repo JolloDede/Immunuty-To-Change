@@ -1,11 +1,11 @@
 <script lang="ts">
-	import type { PageData } from "./$types";
+	import { topcis } from "../store";
 
-    export let data: PageData;
+    
 </script>
 
 <div class="flex flex-col w-4/5 m-auto space-y-1">
-    {#each data.topics as item}
+    {#each $topcis as item}
         <a href={"/xray/"+item.id} class="p-2 border rounded-xl">
             <p>{item.title}</p>
         </a>
