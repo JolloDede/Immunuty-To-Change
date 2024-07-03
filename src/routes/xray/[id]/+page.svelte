@@ -6,6 +6,7 @@
 
 	export let data: PageLoad;
 
+	let titleEditing = false;
 	let xray: Topic;
 	topcis.subscribe((topicList) => {
 		topicList.map((topic) => {
@@ -14,22 +15,35 @@
 			}
 		});
 	});
+
+	function handleTitleDblClick() {
+		titleEditing = true;
+	}
+
+	function handleKeyPress(e: KeyboardEvent) {
+		if (e.key === "Enter")
+			titleEditing = false;
+	}
 </script>
 
-<!-- <h1>{data.id}</h1> -->
 <div class="flex flex-col h-screen">
-	<h1>{xray.title}</h1>
+	{#if titleEditing}
+		<input type="text" bind:value={xray.title} on:keypress={handleKeyPress} />
+	{:else}
+		<h1 on:dblclick={handleTitleDblClick}>{xray.title}</h1>
+	{/if}
+
 	<div class="flex flex-grow w-full">
-		<XrayCol>
+		<XrayCol bind:content={xray.goalList}>
 			<h1 slot="title">Commitment</h1>
 		</XrayCol>
-		<XrayCol>
+		<XrayCol bind:content={xray.insteadList}>
 			<h1 slot="title">Doing / not doing instead</h1>
 		</XrayCol>
-		<XrayCol>
+		<XrayCol bind:content={xray.competingList}>
 			<h1 slot="title">Hidden competing commitment</h1>
 		</XrayCol>
-		<XrayCol>
+		<XrayCol bind:content={xray.assumtionList}>
 			<h1 slot="title">Big assumptions</h1>
 		</XrayCol>
 	</div>
